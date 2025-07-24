@@ -3,314 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slot Hack APKGACOR88 v 5.0</title>
+    <title>Kuis Interaktif UBTK Anestesiologi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto Mono', monospace;
-            background-color: #0d1117;
-            color: #c9d1d9;
+            font-family: 'Inter', sans-serif;
         }
-        #matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-        }
-        .matrix-text {
-            color: #39ff14; /* Neon Green */
-            text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14;
-        }
-        .container-box {
-            background-color: rgba(22, 27, 34, 0.9);
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            position: relative;
-            z-index: 10;
-        }
-        .form-input, .form-select {
-            background-color: #0d1117;
-            border: 1px solid #30363d;
-            color: #c9d1d9;
-            caret-color: #39ff14;
-        }
-        .btn-scan {
-            background-color: #238636;
+        .option-btn.correct {
+            background-color: #22c55e; /* green-500 */
             color: white;
-            border: 1px solid #39d353;
-            box-shadow: 0 0 10px #238636;
-            transition: all 0.2s ease-in-out;
+            border-color: #16a34a; /* green-600 */
         }
-        .btn-scan:hover {
-            background-color: #2ea043;
-            box-shadow: 0 0 15px #39d353;
-            transform: translateY(-2px);
+        .option-btn.incorrect {
+            background-color: #ef4444; /* red-500 */
+            color: white;
+            border-color: #dc2626; /* red-600 */
         }
-        .btn-scan:disabled {
-            background-color: #22442b;
-            color: #555;
-            border-color: #444;
+        .option-btn:disabled {
             cursor: not-allowed;
-            box-shadow: none;
         }
-        .progress-bar-container {
-            background-color: #0d1117;
-            border: 1px solid #30363d;
-        }
-        .progress-bar {
-            background: linear-gradient(90deg, #1e682c, #39ff14);
-            box-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
-            transition: width 0.3s ease-in-out;
-        }
-        #result-section {
-            border-color: #39ff14;
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
-            animation: glow 2s infinite alternate;
-        }
-        .disclaimer {
-            background-color: #ffc107;
-            color: #333;
-            border-left: 5px solid #ffa000;
-        }
-        @keyframes glow {
-            from { box-shadow: 0 0 15px rgba(57, 255, 20, 0.2); }
-            to { box-shadow: 0 0 25px rgba(57, 255, 20, 0.6); }
-        }
-        .typing-cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background-color: #39ff14;
-            animation: blink 1s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        .hide {
+            display: none;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
+<body class="bg-slate-100 text-slate-800 flex items-center justify-center min-h-screen p-4">
 
-    <canvas id="matrix-bg"></canvas>
-
-    <div class="container-box w-full max-w-lg p-6 space-y-6 my-8">
+    <div id="quiz-container" class="w-full max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
         
-        <header class="text-center">
-            <h1 class="text-3xl font-bold matrix-text" style="font-family: 'Orbitron', sans-serif;">APKGACOR88 v 5.0</h1>
-            <p class="text-sm text-gray-500">Hack Protocol Activated</p>
-        </header>
+        <!-- Start Screen -->
+        <div id="start-screen" class="text-center">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Latihan Soal UBTK Anestesiologi</h1>
+            <p class="text-slate-600 mb-8">Uji pengetahuan Anda dengan 100 soal pilihan berganda yang mencakup berbagai topik penting dalam anestesiologi dan terapi intensif. Klik tombol di bawah untuk memulai.</p>
+            <button id="start-btn" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors text-lg shadow-md">
+                Mulai Kuis
+            </button>
+        </div>
 
-        <div class="grid grid-cols-1 gap-4">
-            <div>
-                <label for="provider" class="block text-sm font-medium mb-2 matrix-text">Pilih Provider:</label>
-                <select id="provider" class="form-select w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#39ff14]">
-                    <option value="Pragmatic">Pragmatic Play</option>
-                    <option value="PGSoft">PG Soft</option>
-                </select>
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hide">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-slate-900">Pertanyaan <span id="question-number"></span>/100</h2>
+                <div id="score-display" class="text-lg font-semibold text-blue-600">Skor: <span id="score">0</span></div>
             </div>
-             <div>
-                <label for="username_id" class="block text-sm font-medium mb-2 matrix-text">ID Username Anda:</label>
-                <input type="text" id="username_id" class="form-input w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#39ff14]" placeholder="Masukkan username Anda">
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-200 rounded-full h-2.5 mb-6">
+                <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
             </div>
-            <div>
-                <label for="server" class="block text-sm font-medium mb-2 matrix-text">Pilihan Server:</label>
-                <select id="server" class="form-select w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#39ff14]">
-                    <option value="1">Server 1</option>
-                    <option value="2">Server 2</option>
-                    <option value="3">Server 3</option>
-                </select>
+
+            <!-- Question -->
+            <div id="question-card" class="mb-6">
+                <p id="question-text" class="text-lg sm:text-xl font-semibold leading-relaxed mb-6"></p>
+                <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Options will be inserted here by JS -->
+                </div>
+            </div>
+            
+            <!-- Feedback and Next Button -->
+            <div id="feedback-container" class="mt-6 text-center">
+                 <p id="feedback-text" class="text-lg font-medium mb-4 h-8"></p>
+                 <button id="next-btn" class="w-full sm:w-auto bg-slate-800 text-white font-bold py-3 px-12 rounded-lg hover:bg-slate-900 transition-colors text-lg shadow-md hide">
+                    Lanjut
+                </button>
             </div>
         </div>
 
-        <button id="generate-btn" class="w-full py-3 rounded-md font-bold btn-scan">
-            INJEKSI SERVER SEKARANG
-        </button>
-
-        <div id="progress-section" class="hidden space-y-2 pt-4">
-            <p id="status-text" class="text-center matrix-text text-sm h-5"></p>
-            <div class="progress-bar-container w-full rounded-full h-2 overflow-hidden">
-                <div id="progress-bar" class="progress-bar h-2 rounded-full" style="width: 0%;"></div>
-            </div>
-        </div>
-
-        <div id="result-section" class="hidden p-4 border-2 rounded-lg bg-[#0d1117]">
-             <h2 class="text-lg font-bold text-center matrix-text mb-4">INJEKSI DATA BERHASIL</h2>
-             <div class="space-y-4 text-center">
-                <div class="bg-gray-900 p-3 rounded">
-                    <p class="text-yellow-400 text-sm">Presentase Menang Server:</p>
-                    <p id="win-rate" class="text-3xl font-bold matrix-text"></p>
-                </div>
-                 <div class="bg-gray-900 p-3 rounded">
-                    <p class="text-gray-400 text-sm">3 Digit Kode Deposit:</p>
-                    <p id="deposit-code" class="text-3xl font-bold matrix-text"></p>
-                </div>
-                <div class="bg-gray-900 p-3 rounded">
-                    <p class="text-gray-400 text-sm">Pola Gacor Terdeteksi:</p>
-                    <p id="pola-gacor" class="text-2xl font-bold matrix-text"></p>
-                </div>
-                <div class="bg-gray-900 p-3 rounded">
-                    <p class="text-gray-400 text-sm">Rekomendasi Game Populer:</p>
-                    <p id="rekomendasi-game" class="text-lg font-bold text-yellow-300"></p>
-                </div>
-             </div>
-        </div>
-        
-        <div id="redirect-notice" class="text-center text-yellow-400 text-sm hidden">
-            <p>Screen Shoot hasil ini, masking-server dalam <span id="countdown">15</span> detik...</p>
+        <!-- Result Screen -->
+        <div id="result-screen" class="hide text-center">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Kuis Selesai!</h1>
+            <p class="text-slate-600 text-xl mb-2">Skor Akhir Anda:</p>
+            <p id="final-score" class="text-6xl font-bold text-blue-600 mb-6"></p>
+            <p id="score-message" class="text-lg text-slate-700 mb-8"></p>
+            <button id="restart-btn" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors text-lg shadow-md">
+                Ulangi Kuis
+            </button>
         </div>
 
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Matrix Background Effect
-            const canvas = document.getElementById('matrix-bg');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            const fontSize = 16;
-            const columns = canvas.width / fontSize;
-            const rainDrops = Array.from({ length: columns }).map(() => 1);
-            
-            const drawMatrix = () => {
-                ctx.fillStyle = 'rgba(13, 17, 23, 0.05)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = '#39ff14';
-                ctx.font = fontSize + 'px monospace';
-                rainDrops.forEach((y, ind) => {
-                    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                    const x = ind * fontSize;
-                    ctx.fillText(text, x, y * fontSize);
-                    if (y * fontSize > canvas.height && Math.random() > 0.975) {
-                        rainDrops[ind] = 0;
-                    }
-                    rainDrops[ind]++;
-                });
-            };
-            setInterval(drawMatrix, 33);
+        // --- QUESTION BANK ---
+        // A comprehensive list of 100 questions for anesthesiology.
+        const questions = [
+            // Farmakologi Dasar & Klinis (1-25)
+            { question: "Manakah dari agen inhalasi berikut yang memiliki nilai MAC (Minimum Alveolar Concentration) paling rendah?", options: ["Sevoflurane", "Desflurane", "Isoflurane", "Halothane"], answer: 3 },
+            { question: "Koefisien partisi darah:gas yang rendah pada suatu agen anestesi inhalasi mengindikasikan...", options: ["Potensi tinggi", "Induksi dan pemulihan yang cepat", "Kelarutan tinggi dalam darah", "Efek analgesik kuat"], answer: 1 },
+            { question: "Mekanisme kerja utama propofol adalah melalui potensiasi reseptor...", options: ["NMDA", "GABA-A", "Opioid mu", "Nikotinik"], answer: 1 },
+            { question: "Efek samping kardiovaskular yang paling khas dari pemberian ketamin adalah...", options: ["Hipotensi dan bradikardia", "Hipertensi dan takikardia", "Tidak ada perubahan hemodinamik", "Blok jantung"], answer: 1 },
+            { question: "Etomidate sering dipilih untuk induksi pada pasien dengan gangguan kardiovaskular karena...", options: ["Menyebabkan bronkodilatasi", "Memiliki efek analgesik", "Stabilitas hemodinamik yang baik", "Durasi kerja yang sangat singkat"], answer: 2 },
+            { question: "Succinylcholine dikontraindikasikan pada pasien dengan luka bakar luas setelah 24 jam karena risiko...", options: ["Hipertermia maligna", "Hiperkalemia berat", "Bradikardia sinus", "Reaksi anafilaksis"], answer: 1 },
+            { question: "Agen pembalik (reversal agent) untuk pelumpuh otot non-depolarisasi seperti rocuronium yang bekerja dengan cara enkapsulasi adalah...", options: ["Neostigmine", "Edrophonium", "Sugammadex", "Atropine"], answer: 2 },
+            { question: "Opioid yang memiliki potensi analgesik paling kuat per miligram adalah...", options: ["Morphine", "Fentanyl", "Sufentanil", "Meperidine"], answer: 2 },
+            { question: "Gejala klasik overdosis opioid yang dikenal sebagai 'trias opioid' adalah...", options: ["Depresi napas, miosis, dan penurunan kesadaran", "Hipertensi, midriasis, dan agitasi", "Demam, kaku otot, dan takikardia", "Hipotensi, ruam kulit, dan bronkospasme"], answer: 0 },
+            { question: "Anestesi lokal bekerja dengan cara memblokir kanal ion apa pada membran sel saraf?", options: ["Kalium (K+)", "Kalsium (Ca2+)", "Klorida (Cl-)", "Natrium (Na+)"], answer: 3 },
+            { question: "Faktor utama yang menentukan onset kerja suatu anestesi lokal adalah...", options: ["Potensi", "pKa", "Kelarutan lemak", "Ikatan protein"], answer: 1 },
+            { question: "Terapi lini pertama dan paling spesifik untuk tata laksana Local Anesthetic Systemic Toxicity (LAST) adalah...", options: ["Infus emulsi lipid 20%", "Diazepam IV", "Epinefrin dosis tinggi", "Natrium bikarbonat"], answer: 0 },
+            { question: "Norepinefrin meningkatkan tekanan darah terutama melalui efeknya pada reseptor...", options: ["Alfa-1", "Beta-1", "Beta-2", "Dopaminergik"], answer: 0 },
+            { question: "Dobutamin adalah agen inotropik yang sering digunakan pada syok kardiogenik karena efek dominannya pada reseptor...", options: ["Alfa-1", "Beta-1", "Beta-2", "Vasopresin"], answer: 1 },
+            { question: "Dexmedetomidine adalah sedatif yang unik karena bekerja sebagai agonis reseptor...", options: ["GABA-A", "Alfa-2 adrenergik", "NMDA", "Serotonin"], answer: 1 },
+            { question: "Efek samping yang paling dikhawatirkan dari penggunaan etomidate secara infus kontinu adalah...", options: ["Depresi napas", "Supresi adrenal", "Gagal ginjal", "Trombositopenia"], answer: 1 },
+            { question: "Metabolisme remifentanil yang sangat cepat terjadi melalui...", options: ["Enzim sitokrom P450 di hati", "Pseudocholinesterase di plasma", "Esterase non-spesifik di plasma dan jaringan", "Ekskresi ginjal tanpa perubahan"], answer: 2 },
+            { question: "Manakah dari pelumpuh otot berikut yang pelepasannya paling sedikit histamin?", options: ["Atracurium", "Mivacurium", "Cisatracurium", "d-Tubocurarine"], answer: 2 },
+            { question: "Obat yang digunakan bersama neostigmine untuk mencegah efek samping muskarinik (seperti bradikardia) adalah...", options: ["Esmolol", "Glycopyrrolate", "Lidocaine", "Naloxone"], answer: 1 },
+            { question: "Efek 'dissociative anesthesia' adalah karakteristik dari agen...", options: ["Propofol", "Thiopental", "Ketamin", "Midazolam"], answer: 2 },
+            { question: "MAC (Minimum Alveolar Concentration) dari desflurane adalah sekitar...", options: ["0.75%", "1.15%", "2.0%", "6.0%"], answer: 3 },
+            { question: "Obat yang dapat memicu hipertermia maligna pada individu yang rentan adalah...", options: ["Propofol dan Fentanyl", "Sevoflurane dan Succinylcholine", "Ketamin dan Midazolam", "Rocuronium dan Neostigmine"], answer: 1 },
+            { question: "Antidotum spesifik untuk hipertermia maligna adalah...", options: ["Sodium bicarbonate", "Calcium gluconate", "Dantrolene", "Magnesium sulfate"], answer: 2 },
+            { question: "Efek samping utama dari pemberian cepat vancomycin yang dikenal sebagai 'Red Man Syndrome' disebabkan oleh...", options: ["Reaksi anafilaksis IgE-mediated", "Pelepasan histamin non-imunologis", "Toksisitas langsung pada sel mast", "Aktivasi sistem komplemen"], answer: 1 },
+            { question: "Tramadol memberikan efek analgesik melalui dua mekanisme, yaitu agonis lemah reseptor mu-opioid dan...", options: ["Inhibisi reuptake serotonin dan norepinefrin", "Antagonis reseptor NMDA", "Blokade kanal kalsium", "Agonis reseptor alfa-2"], answer: 0 },
+            // Fisiologi & Monitoring (26-50)
+            { question: "Menurut hukum Frank-Starling, peningkatan preload ventrikel akan menyebabkan...", options: ["Penurunan kekuatan kontraksi", "Peningkatan kekuatan kontraksi", "Tidak ada perubahan pada kontraksi", "Penurunan denyut jantung"], answer: 1 },
+            { question: "Afterload ventrikel kiri paling baik digambarkan oleh...", options: ["Central Venous Pressure (CVP)", "Systemic Vascular Resistance (SVR)", "Pulmonary Capillary Wedge Pressure (PCWP)", "Stroke Volume (SV)"], answer: 1 },
+            { question: "Pada kurva disosiasi oksihemoglobin, pergeseran ke kanan (Right shift) menandakan...", options: ["Peningkatan afinitas O2 terhadap Hb", "Penurunan pelepasan O2 di jaringan", "Penurunan afinitas O2 terhadap Hb", "Terjadi pada kondisi alkalosis"], answer: 2 },
+            { question: "Faktor yang menyebabkan pergeseran kurva disosiasi oksihemoglobin ke kiri adalah...", options: ["Peningkatan suhu", "Peningkatan 2,3-DPG", "Penurunan pH (asidosis)", "Hipotermia"], answer: 3 },
+            { question: "Volume udara yang tersisa di paru-paru setelah ekspirasi maksimal disebut...", options: ["Volume Tidal (TV)", "Kapasitas Vital (VC)", "Volume Residu (RV)", "Kapasitas Residu Fungsional (FRC)"], answer: 2 },
+            { question: "Pada kapnografi, fase III (plateau alveolar) yang menanjak (bentuk sirip hiu) merupakan tanda klasik dari...", options: ["Emboli paru", "Penyakit paru obstruktif (PPOK)", "Upaya napas spontan pasien", "Henti jantung"], answer: 1 },
+            { question: "Hilangnya gelombang ETCO2 secara tiba-tiba pada pasien yang terintubasi paling mungkin disebabkan oleh...", options: ["Sirkuit terlepas atau obstruksi total ETT", "Hipertermia maligna", "Overdosis opioid", "Bronkospasme berat"], answer: 0 },
+            { question: "Takik (cleft) pada fase plateau kapnogram (curare cleft) mengindikasikan...", options: ["Efek pelumpuh otot sudah habis", "Pasien mulai bernapas spontan", "Kebocoran pada sirkuit", "Kardioemboli"], answer: 1 },
+            { question: "Central Venous Pressure (CVP) mencerminkan tekanan di...", options: ["Ventrikel kiri", "Atrium kanan", "Arteri pulmonalis", "Aorta"], answer: 1 },
+            { question: "Dicrotic notch pada gelombang tekanan arteri invasif menandakan...", options: ["Pembukaan katup aorta", "Kontraksi isovolumetrik ventrikel", "Penutupan katup aorta", "Aliran darah puncak"], answer: 2 },
+            { question: "Kompensasi respiratorik primer untuk asidosis metabolik adalah...", options: ["Hipoventilasi untuk menahan CO2", "Hiperventilasi untuk membuang CO2", "Ekskresi H+ oleh ginjal", "Retensi bikarbonat oleh ginjal"], answer: 1 },
+            { question: "Nilai normal pH darah arteri adalah...", options: ["7.25 - 7.35", "7.35 - 7.45", "7.45 - 7.55", "7.55 - 7.65"], answer: 1 },
+            { question: "Aliran darah ke otak (Cerebral Blood Flow) akan meningkat secara signifikan jika PaCO2...", options: ["Menurun di bawah 30 mmHg", "Meningkat di atas 45 mmHg", "Tetap stabil antara 35-45 mmHg", "Menurun di bawah 20 mmHg"], answer: 1 },
+            { question: "Tekanan perfusi serebral (Cerebral Perfusion Pressure - CPP) dihitung dengan rumus...", options: ["MAP - CVP", "MAP - ICP", "ICP - CVP", "SAP - DAP"], answer: 1 },
+            { question: "Zona West III pada paru-paru adalah area di mana...", options: ["Pa > Pv > PA", "PA > Pa > Pv", "Pa > PA > Pv", "Aliran darah tidak ada"], answer: 2 },
+            { question: "Kapasitas Residu Fungsional (FRC) paling menurun pada posisi...", options: ["Berdiri", "Duduk", "Supine (terlentang)", "Lateral dekubitus"], answer: 2 },
+            { question: "Hukum Fick tentang difusi menyatakan bahwa laju difusi gas berbanding lurus dengan...", options: ["Tebal membran dan berat molekul gas", "Luas permukaan dan gradien tekanan parsial", "Kelarutan gas dan tebal membran", "Berat molekul gas dan luas permukaan"], answer: 1 },
+            { question: "Refleks Cushing (Cushing's triad) sebagai tanda peningkatan TIK terdiri dari...", options: ["Hipotensi, takikardia, dan napas cepat", "Hipertensi, bradikardia, dan pola napas ireguler", "Hipotensi, bradikardia, dan apnea", "Hipertensi, takikardia, dan takipnea"], answer: 1 },
+            { question: "Monitoring yang dianggap sebagai standar emas untuk memastikan penempatan ETT yang benar di trakea adalah...", options: ["Auskultasi bilateral", "Visualisasi ETT melewati pita suara", "Pengembunan di dalam ETT", "Kapnografi (deteksi ETCO2 > 30 mmHg)"], answer: 3 },
+            { question: "Dalam analisis gas darah, 'base excess' yang negatif menunjukkan adanya...", options: ["Asidosis metabolik", "Alkalosis metabolik", "Asidosis respiratorik", "Alkalosis respiratorik"], answer: 0 },
+            { question: "Autoregulasi aliran darah ginjal akan terganggu jika MAP turun di bawah...", options: ["100 mmHg", "90 mmHg", "80 mmHg", "60 mmHg"], answer: 3 },
+            { question: "Hormon utama yang dilepaskan sebagai respons terhadap hipovolemia untuk menahan air adalah...", options: ["Aldosteron", "Kortisol", "Antidiuretic Hormone (ADH)", "Atrial Natriuretic Peptide (ANP)"], answer: 2 },
+            { question: "Fungsi utama dari surfaktan di alveoli adalah...", options: ["Meningkatkan tegangan permukaan", "Mencegah kolaps alveolar saat ekspirasi", "Membantu pertukaran gas", "Melawan infeksi"], answer: 1 },
+            { question: "Menurut klasifikasi Mallampati, jika hanya palatum molle dan uvula yang terlihat, maka skornya adalah...", options: ["Kelas I", "Kelas II", "Kelas III", "Kelas IV"], answer: 1 },
+            { question: "Pulse oximetry mengukur saturasi oksigen dengan mendeteksi perbedaan absorpsi cahaya antara...", options: ["Oksihemoglobin dan Karboksihemoglobin", "Oksihemoglobin dan Deoksihemoglobin", "Methemoglobin dan Deoksihemoglobin", "Oksihemoglobin dan Sulfhemoglobin"], answer: 1 },
+            // Anestesi Regional & Manajemen Nyeri (51-65)
+            { question: "Struktur anatomi yang terakhir ditembus oleh jarum spinal sebelum mencapai ruang subarachnoid adalah...", options: ["Ligamentum flavum", "Membran dura mater", "Membran arachnoid", "Ligamentum supraspinosum"], answer: 2 },
+            { question: "Urutan blokade fungsional serabut saraf pada anestesi spinal dari yang tercepat adalah...", options: ["Motorik, Sensorik, Simpatis", "Sensorik, Motorik, Simpatis", "Simpatis, Sensorik, Motorik", "Motorik, Simpatis, Sensorik"], answer: 2 },
+            { question: "Komplikasi hipotensi setelah anestesi spinal terutama disebabkan oleh...", options: ["Depresi miokard langsung", "Vasodilatasi arteri dan vena (simpatolisis)", "Kehilangan darah", "Pelepasan histamin"], answer: 1 },
+            { question: "Faktor utama yang paling mempengaruhi penyebaran (tinggi blok) anestesi lokal hiperbarik pada anestesi spinal adalah...", options: ["Kecepatan injeksi", "Volume obat", "Posisi pasien", "Ukuran jarum"], answer: 2 },
+            { question: "Sakit kepala pasca pungsi dura (PDPH) memiliki karakteristik khas yaitu...", options: ["Memburuk saat berbaring", "Mereda saat berdiri atau duduk", "Memburuk saat berdiri dan mereda saat berbaring", "Tidak berhubungan dengan posisi"], answer: 2 },
+            { question: "Tata laksana definitif untuk PDPH yang berat dan persisten adalah...", options: ["Hidrasi dan kafein", "Analgesik opioid", "Epidural blood patch", "Pemberian sumatriptan"], answer: 2 },
+            { question: "Pada anestesi epidural, ruang epidural diidentifikasi dengan teknik...", options: ["Loss of Resistance (LOR)", "Aspirasi cairan serebrospinal", "Merasakan 'pop' saat menembus dura", "Menggunakan stimulator saraf"], answer: 0 },
+            { question: "Dosis uji (test dose) pada anestesi epidural biasanya mengandung lidokain dan epinefrin untuk mendeteksi...", options: ["Penempatan intratekal dan intravaskular", "Alergi terhadap obat", "Tinggi blok yang adekuat", "Onset blokade motorik"], answer: 0 },
+            { question: "Struktur yang membentuk atap dari 'axillary sheath' untuk blok pleksus brakialis aksilaris adalah...", options: ["Otot pektoralis minor", "Otot skalenus anterior", "Klavikula", "Gabungan fasia otot coracobrachialis dan biseps"], answer: 3 },
+            { question: "Pada blok interskalenus, saraf yang paling sering 'terlewatkan' (spared) adalah...", options: ["Musculocutaneous", "Medianus", "Radialis", "Ulnaris"], answer: 3 },
+            { question: "Komplikasi yang hampir selalu terjadi pada blok interskalenus adalah...", options: ["Pneumotoraks", "Blok saraf frenikus ipsilateral", "Sindrom Horner", "Kejang"], answer: 1 },
+            { question: "Konsep 'multimodal analgesia' bertujuan untuk...", options: ["Menggunakan opioid dosis tinggi", "Menargetkan satu jalur nyeri secara intensif", "Menggunakan kombinasi analgesik dengan mekanisme kerja berbeda", "Menghindari penggunaan anestesi regional"], answer: 2 },
+            { question: "Obat anti-inflamasi non-steroid (OAINS) bekerja dengan menghambat enzim...", options: ["Lipoksigenase", "Siklooksigenase (COX)", "Fosfolipase A2", "Monoamine oxidase"], answer: 1 },
+            { question: "Gabapentin dan pregabalin berguna dalam manajemen nyeri dengan cara...", options: ["Memblokir kanal natrium", "Bekerja pada subunit alfa-2-delta dari kanal kalsium", "Menghambat reuptake serotonin", "Agonis reseptor opioid"], answer: 1 },
+            { question: "Bier block (Intravenous Regional Anesthesia) paling sesuai untuk prosedur pada...", options: ["Bahu", "Panggul", "Tangan atau kaki bagian bawah", "Abdomen"], answer: 2 },
+            // Anestesi Sub-spesialistik (66-85)
+            { question: "Perubahan fisiologis kardiovaskular pada kehamilan normal meliputi...", options: ["Penurunan curah jantung dan peningkatan SVR", "Peningkatan curah jantung dan penurunan SVR", "Peningkatan curah jantung dan peningkatan SVR", "Penurunan curah jantung dan penurunan SVR"], answer: 1 },
+            { question: "Kompresi aortokaval oleh uterus gravid pada posisi terlentang dapat dicegah dengan...", options: ["Memberikan posisi Trendelenburg", "Memiringkan pasien ke kiri (left uterine displacement)", "Memberikan vasopresor profilaksis", "Menggunakan bantal di bawah lutut"], answer: 1 },
+            { question: "Rapid Sequence Induction and Intubation (RSII) diindikasikan pada pasien hamil karena...", options: ["Risiko jalan napas sulit yang tinggi", "Dianggap sebagai 'lambung penuh' (full stomach)", "Perubahan hormonal", "Kebutuhan oksigen yang rendah"], answer: 1 },
+            { question: "Pada neonatus, frekuensi napas normal lebih tinggi dan volume tidal lebih kecil dibandingkan dewasa karena...", options: ["Dinding dada yang kaku", "Tingkat metabolisme yang lebih tinggi dan FRC yang rendah", "Paru-paru yang lebih komplians", "Respons terhadap CO2 yang tumpul"], answer: 1 },
+            { question: "Dosis induksi propofol pada anak-anak (mg/kg) jika dibandingkan dengan orang dewasa adalah...", options: ["Lebih rendah", "Sama", "Lebih tinggi", "Sangat bervariasi dan tidak dapat diprediksi"], answer: 2 },
+            { question: "Struktur paling sempit pada jalan napas bayi dan anak kecil adalah...", options: ["Rima glottidis (pita suara)", "Kartilago krikoid", "Trakea subglotis", "Epiglotis"], answer: 1 },
+            { question: "Tujuan utama dalam neuroanestesi adalah menjaga...", options: ["Tekanan darah arteri serendah mungkin", "Keseimbangan antara suplai dan kebutuhan oksigen otak", "PaCO2 di atas 50 mmHg", "Pasien dalam keadaan anestesi sangat dalam"], answer: 1 },
+            { question: "Manitol digunakan pada bedah saraf untuk...", options: ["Meningkatkan aliran darah otak", "Menurunkan tekanan intrakranial melalui diuresis osmotik", "Memberikan nutrisi otak", "Mencegah kejang"], answer: 1 },
+            { question: "Selama operasi bedah jantung dengan cardiopulmonary bypass (CPB), fungsi jantung dan paru-paru diambil alih oleh mesin. Antikoagulan yang wajib digunakan adalah...", options: ["Warfarin", "Heparin", "Aspirin", "Clopidogrel"], answer: 1 },
+            { question: "Setelah lepas dari CPB, heparin dinetralisir dengan pemberian...", options: ["Vitamin K", "Fresh Frozen Plasma (FFP)", "Protamine sulfate", "Asam traneksamat"], answer: 2 },
+            { question: "Pada pasien dengan penyakit katup aorta stenosis berat, tujuan hemodinamik utama adalah...", options: ["Menjaga denyut jantung cepat dan afterload rendah", "Menjaga denyut jantung normal, preload adekuat, dan afterload tinggi", "Menciptakan kondisi takikardia dan hipotensi", "Menurunkan preload sebanyak mungkin"], answer: 1 },
+            { question: "Teknik anestesi yang seringkali dihindari pada pasien dengan fraktur bola mata terbuka (open globe injury) adalah...", options: ["Anestesi umum dengan intubasi", "Penggunaan succinylcholine", "Penggunaan rocuronium", "Anestesi topikal"], answer: 1 },
+            { question: "Refleks okulokardiak (oculocardiac reflex) yang ditandai dengan bradikardia dapat dipicu oleh tarikan pada...", options: ["Otot rektus medialis", "Kornea", "Kelopak mata", "Retina"], answer: 0 },
+            { question: "Pada pasien geriatri, kebutuhan dosis obat anestesi umumnya menurun karena...", options: ["Peningkatan massa otot", "Penurunan lemak tubuh dan peningkatan air tubuh total", "Penurunan fungsi hati dan ginjal serta peningkatan sensitivitas otak", "Peningkatan laju metabolisme basal"], answer: 2 },
+            { question: "Anestesi untuk prosedur bronkoskopi kaku (rigid bronchoscopy) sering menggunakan teknik...", options: ["Anestesi spinal", "Total Intravenous Anesthesia (TIVA) dengan jet ventilation", "Laryngeal Mask Airway (LMA)", "Anestesi lokal saja"], answer: 1 },
+            { question: "Pada pasien obesitas morbid, kapasitas residu fungsional (FRC) secara signifikan...", options: ["Meningkat", "Menurun", "Tidak berubah", "Meningkat hanya pada posisi duduk"], answer: 1 },
+            { question: "Posisi 'ramped' atau 'head-elevated laryngoscopy position' pada pasien obesitas bertujuan untuk...", options: ["Mengurangi risiko aspirasi", "Memudahkan akses vena", "Menyejajarkan aksis oral, faringeal, dan laringeal", "Meningkatkan curah jantung"], answer: 2 },
+            { question: "Dalam anestesi untuk prosedur Electroconvulsive Therapy (ECT), tujuan utama adalah...", options: ["Menciptakan anestesi yang dalam dan lama", "Memberikan relaksasi otot penuh", "Memberikan anestesi singkat dan mengontrol respons hemodinamik terhadap kejang", "Menghindari penggunaan obat apapun"], answer: 2 },
+            { question: "Pada pasien dengan miastenia gravis, respons terhadap pelumpuh otot non-depolarisasi adalah...", options: ["Resisten (membutuhkan dosis lebih tinggi)", "Sangat sensitif (membutuhkan dosis lebih rendah)", "Normal", "Tidak dapat diprediksi"], answer: 1 },
+            { question: "Sebaliknya, pasien dengan miastenia gravis menunjukkan respons ... terhadap succinylcholine.", options: ["Sangat sensitif", "Resisten", "Normal", "Kontraindikasi absolut"], answer: 1 },
+            // Terapi Intensif & Kegawatdaruratan (86-100)
+            { question: "Menurut panduan Surviving Sepsis Campaign, vasopresor pilihan pertama untuk syok septik adalah...", options: ["Dopamin", "Fenilefrin", "Epinefrin", "Norepinefrin"], answer: 3 },
+            { question: "Target Mean Arterial Pressure (MAP) awal pada resusitasi pasien syok septik adalah...", options: ["≥ 55 mmHg", "≥ 65 mmHg", "≥ 75 mmHg", "≥ 85 mmHg"], answer: 1 },
+            { question: "Pada Acute Respiratory Distress Syndrome (ARDS), strategi ventilasi mekanik yang terbukti memperbaiki luaran adalah...", options: ["Volume tidal tinggi dan PEEP rendah", "Volume tidal rendah (6 ml/kg BB ideal) dan PEEP optimal", "Frekuensi napas tinggi dan FiO2 100%", "Mode pressure support dengan PEEP minimal"], answer: 1 },
+            { question: "Reaksi transfusi hemolitik akut akibat inkompatibilitas ABO ditandai dengan...", options: ["Hipotensi, demam, dan hemoglobinuria", "Urtikaria dan gatal", "Edema paru non-kardiogenik", "Demam ringan tanpa gejala lain"], answer: 0 },
+            { question: "Transfusion-Related Acute Lung Injury (TRALI) adalah komplikasi transfusi yang ditandai oleh...", options: ["Gagal jantung kongestif", "Edema paru non-kardiogenik akut dalam 6 jam setelah transfusi", "Reaksi anafilaksis", "Kelebihan cairan sirkulasi (TACO)"], answer: 1 },
+            { question: "Menurut panduan resusitasi jantung paru (BLS/ACLS) terbaru dari AHA, rasio kompresi dada terhadap ventilasi untuk dewasa adalah...", options: ["15:2", "30:2", "30:1", "Kompresi kontinu tanpa henti"], answer: 1 },
+            { question: "Kedalaman kompresi dada yang direkomendasikan untuk orang dewasa adalah...", options: ["2-3 cm", "3-4 cm", "5-6 cm", "7-8 cm"], answer: 2 },
+            { question: "Obat pertama yang diberikan untuk ritme VF (Ventricular Fibrillation) atau pVT (pulseless Ventricular Tachycardia) yang persisten setelah kejut listrik adalah...", options: ["Lidocaine", "Amiodarone", "Epinephrine", "Magnesium Sulfate"], answer: 2 },
+            { question: "Energi yang direkomendasikan untuk kejut listrik pertama menggunakan defibrilator bifasik adalah...", options: ["50-100 J", "120-200 J", "250-300 J", "360 J"], answer: 1 },
+            { question: "Manajemen jalan napas sulit yang diantisipasi (anticipated difficult airway) pada pasien sadar sebaiknya menggunakan teknik...", options: ["Intubasi fiberoptik sadar (Awake Fiberoptic Intubation)", "Rapid Sequence Induction (RSI)", "Intubasi dengan video laringoskop setelah induksi", "Memasang LMA sebagai pilihan utama"], answer: 0 },
+            { question: "Syok kardiogenik ditandai dengan...", options: ["SVR rendah dan curah jantung tinggi", "SVR tinggi dan curah jantung rendah", "SVR rendah dan curah jantung rendah", "SVR tinggi dan curah jantung tinggi"], answer: 1 },
+            { question: "Penyebab paling umum dari syok obstruktif di lingkungan trauma adalah...", options: ["Emboli paru masif", "Tamponade jantung", "Tension pneumothorax", "Semua benar"], answer: 3 },
+            { question: "Pada pasien trauma dengan perdarahan masif, protokol transfusi masif umumnya menganjurkan rasio PRC:FFP:Trombosit sekitar...", options: ["5:2:1", "3:2:1", "1:1:1", "10:1:1"], answer: 2 },
+            { question: "Asam traneksamat (tranexamic acid) pada pasien trauma bermanfaat karena...", options: ["Meningkatkan agregasi trombosit", "Menghambat fibrinolisis", "Bertindak sebagai faktor koagulasi", "Meningkatkan tekanan darah"], answer: 1 },
+            { question: "Pada pasien dengan status epileptikus, obat lini pertama yang diberikan untuk menghentikan kejang adalah...", options: ["Fenitoin", "Benzodiazepin (misal: Lorazepam, Diazepam)", "Propofol", "Fenobarbital"], answer: 1 },
+        ];
 
-            // Main App Logic
-            const generateBtn = document.getElementById('generate-btn');
-            const progressSection = document.getElementById('progress-section');
-            const resultSection = document.getElementById('result-section');
-            const redirectNotice = document.getElementById('redirect-notice');
-            const countdownEl = document.getElementById('countdown');
-            const statusTextEl = document.getElementById('status-text');
-            const progressBar = document.getElementById('progress-bar');
-            
-            const gameData = {
-                "Pragmatic": ["Gates of Olympus Super Scatter", "Mahjong Ways 3", "Starlight Princess 1000", "Gates of Olympus 1000", "Gates of Olympus Xmas 1000", "Gates of Olympus", "Starlight Princess", "Sweet Bonanza", "Gates of Gatot Kaca"],
-                "PGSoft": ["Wild Bounty", "Oishi Delight", "Mahjong Ways 1", "Mahjong Ways 2", "Lucky Neko", "Wild Bandito", "Treasures of Aztec"]
-            };
 
-            generateBtn.addEventListener('click', () => {
-                const usernameInput = document.getElementById('username_id');
-                if (usernameInput.value.trim() === '') {
-                    alert('Harap masukkan ID Username Anda terlebih dahulu!');
-                    return;
+        // --- DOM ELEMENTS ---
+        const startScreen = document.getElementById('start-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+
+        const startBtn = document.getElementById('start-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const restartBtn = document.getElementById('restart-btn');
+
+        const questionNumberEl = document.getElementById('question-number');
+        const scoreEl = document.getElementById('score');
+        const progressBar = document.getElementById('progress-bar');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackTextEl = document.getElementById('feedback-text');
+        
+        const finalScoreEl = document.getElementById('final-score');
+        const scoreMessageEl = document.getElementById('score-message');
+
+        // --- QUIZ STATE ---
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let shuffledQuestions = [];
+
+        // --- FUNCTIONS ---
+
+        function startQuiz() {
+            startScreen.classList.add('hide');
+            resultScreen.classList.add('hide');
+            quizScreen.classList.remove('hide');
+            
+            currentQuestionIndex = 0;
+            score = 0;
+            shuffledQuestions = questions.sort(() => Math.random() - 0.5); // Shuffle questions
+            
+            scoreEl.textContent = score;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState();
+            const currentQuestion = shuffledQuestions[currentQuestionIndex];
+            
+            questionNumberEl.textContent = currentQuestionIndex + 1;
+            questionTextEl.textContent = currentQuestion.question;
+            
+            // Update progress bar
+            const progressPercentage = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-btn', 'w-full', 'p-4', 'border-2', 'border-slate-300', 'rounded-lg', 'text-left', 'hover:bg-slate-100', 'hover:border-blue-500', 'transition-colors', 'duration-200');
+                button.dataset.index = index;
+                button.addEventListener('click', selectAnswer);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function resetState() {
+            nextBtn.classList.add('hide');
+            feedbackTextEl.textContent = '';
+            while (optionsContainer.firstChild) {
+                optionsContainer.removeChild(optionsContainer.firstChild);
+            }
+        }
+
+        function selectAnswer(e) {
+            const selectedButton = e.target;
+            const selectedIndex = parseInt(selectedButton.dataset.index);
+            const correctIndex = shuffledQuestions[currentQuestionIndex].answer;
+
+            if (selectedIndex === correctIndex) {
+                score++;
+                scoreEl.textContent = score;
+                feedbackTextEl.textContent = "Jawaban Benar!";
+                feedbackTextEl.classList.add('text-green-600');
+                feedbackTextEl.classList.remove('text-red-600');
+            } else {
+                feedbackTextEl.textContent = "Jawaban Salah.";
+                feedbackTextEl.classList.add('text-red-600');
+                feedbackTextEl.classList.remove('text-green-600');
+            }
+
+            Array.from(optionsContainer.children).forEach((button, index) => {
+                button.disabled = true;
+                if (index === correctIndex) {
+                    button.classList.add('correct');
+                } else if (index === selectedIndex) {
+                    button.classList.add('incorrect');
                 }
-
-                generateBtn.disabled = true;
-                generateBtn.textContent = 'MENGINJEKSI SERVER...';
-                progressSection.classList.remove('hidden');
-                resultSection.classList.add('hidden');
-                redirectNotice.classList.add('hidden');
-                progressBar.style.width = '0%';
-                
-                const statusMessages = [
-                    'Menghubungi server pilihan...',
-                    'Mengaktifkan protokol injeksi...',
-                    'Mencari celah keamanan...',
-                    'Menanamkan script apkgacor88.exe...',
-                    'Menganalisis Pola & RTP...',
-                    'Finalisasi data...'
-                ];
-                
-                let currentProgress = 0;
-                
-                const runAnalysis = async () => {
-                    for (const message of statusMessages) {
-                        await typeMessage(message, statusTextEl);
-                        currentProgress += 100 / statusMessages.length;
-                        progressBar.style.width = Math.min(currentProgress, 100) + '%';
-                        await new Promise(resolve => setTimeout(resolve, 300));
-                    }
-                    statusTextEl.innerHTML = 'Analisis Selesai! <span class="matrix-text">Server Berhasil Diinjeksi.</span>';
-                    showResults();
-                    generateBtn.disabled = false;
-                    generateBtn.textContent = 'INJEKSI SERVER SEKARANG';
-                };
-
-                runAnalysis();
             });
 
-            async function typeMessage(message, element) {
-                element.innerHTML = '';
-                const cursor = '<span class="typing-cursor"></span>';
-                for (let i = 0; i < message.length; i++) {
-                    element.innerHTML = message.substring(0, i + 1) + cursor;
-                    await new Promise(resolve => setTimeout(resolve, 25));
-                }
-                element.innerHTML = message;
+            if (shuffledQuestions.length > currentQuestionIndex + 1) {
+                nextBtn.classList.remove('hide');
+            } else {
+                // End of quiz
+                setTimeout(showResult, 1500);
             }
+        }
 
-            function showResults() {
-                // Generate random results based on new requirements
-                const winRate = (Math.random() * (99.87 - 88.00) + 88.00).toFixed(2) + '%';
-                const depositCode = Math.floor(Math.random() * 900) + 100;
-                const spin = () => Math.floor(Math.random() * 20) + 10;
-                const pola = `Turbo ${spin()}x, Manual ${spin()}x, Cepat ${spin()}x`;
-                
-                const selectedProvider = document.getElementById('provider').value;
-                const popularGames = gameData[selectedProvider];
-                const recommendedGames = [...popularGames].sort(() => 0.5 - Math.random()).slice(0, 3).join(', ');
-
-                // Display results
-                document.getElementById('win-rate').textContent = winRate;
-                document.getElementById('deposit-code').textContent = depositCode;
-                document.getElementById('pola-gacor').textContent = pola;
-                document.getElementById('rekomendasi-game').textContent = recommendedGames;
-
-                // Hide progress and show results
-                setTimeout(() => {
-                    progressSection.classList.add('hidden');
-                    resultSection.classList.remove('hidden');
-                    startRedirectCountdown();
-                }, 500);
+        function showResult() {
+            quizScreen.classList.add('hide');
+            resultScreen.classList.remove('hide');
+            
+            const finalPercentage = Math.round((score / shuffledQuestions.length) * 100);
+            finalScoreEl.textContent = `${finalPercentage}%`;
+            
+            let message = '';
+            if (finalPercentage >= 85) {
+                message = 'Luar biasa! Pemahaman Anda sangat mendalam.';
+            } else if (finalPercentage >= 70) {
+                message = 'Bagus! Anda sudah di jalur yang benar. Teruslah berlatih.';
+            } else if (finalPercentage >= 50) {
+                message = 'Cukup baik. Fokus pada area yang masih kurang untuk meningkatkan skor.';
+            } else {
+                message = 'Jangan menyerah! Tinjau kembali materi dan coba lagi. Anda pasti bisa!';
             }
+            scoreMessageEl.textContent = message;
+        }
 
-            function startRedirectCountdown() {
-                redirectNotice.classList.remove('hidden');
-                let count = 15;
-                countdownEl.textContent = count;
+        function handleNextQuestion() {
+            currentQuestionIndex++;
+            showQuestion();
+        }
 
-                const redirectURLs = {
-                    "1": "https://iblbetblack.com/?ref=apkgacor",
-                    "2": "https://nx303gas.live/?ref=apkgacor",
-                    "3": "https://nx303gas.live/?ref=apkgacor"
-                };
-                const selectedServer = document.getElementById('server').value;
-                const targetURL = redirectURLs[selectedServer];
+        // --- EVENT LISTENERS ---
+        startBtn.addEventListener('click', startQuiz);
+        nextBtn.addEventListener('click', handleNextQuestion);
+        restartBtn.addEventListener('click', startQuiz);
 
-                const countdownInterval = setInterval(() => {
-                    count--;
-                    countdownEl.textContent = count;
-                    if (count <= 0) {
-                        clearInterval(countdownInterval);
-                        window.location.href = targetURL;
-                    }
-                }, 1000);
-            }
-        });
     </script>
 </body>
 </html>

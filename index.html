@@ -10,15 +10,16 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        /* Custom styles for a softer dark mode visual */
         .option-btn.correct {
-            background-color: #22c55e; /* green-500 */
-            color: white;
-            border-color: #16a34a; /* green-600 */
+            background-color: #166534; /* green-800 */
+            color: #dcfce7; /* green-100 */
+            border-color: #22c55e; /* green-500 */
         }
         .option-btn.incorrect {
-            background-color: #ef4444; /* red-500 */
-            color: white;
-            border-color: #dc2626; /* red-600 */
+            background-color: #991b1b; /* red-800 */
+            color: #fee2e2; /* red-100 */
+            border-color: #ef4444; /* red-500 */
         }
         .option-btn:disabled {
             cursor: not-allowed;
@@ -28,15 +29,23 @@
         }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 flex items-center justify-center min-h-screen p-4">
+<body class="bg-slate-900 text-slate-300 flex items-center justify-center min-h-screen p-4">
 
-    <div id="quiz-container" class="w-full max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+    <div id="quiz-container" class="w-full max-w-3xl mx-auto bg-slate-800 p-6 sm:p-8 rounded-2xl shadow-2xl shadow-slate-950/50">
         
         <!-- Start Screen -->
         <div id="start-screen" class="text-center">
-            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Latihan Soal UBTK Anestesiologi</h1>
-            <p class="text-slate-600 mb-8">Uji pengetahuan Anda dengan 100 soal pilihan berganda yang mencakup berbagai topik penting dalam anestesiologi dan terapi intensif. Klik tombol di bawah untuk memulai.</p>
-            <button id="start-btn" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors text-lg shadow-md">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-4">Latihan Soal UBTK Anestesiologi</h1>
+            <p class="text-slate-400 mb-8">Uji pengetahuan Anda dengan 100 soal pilihan berganda yang mencakup berbagai topik penting dalam anestesiologi dan terapi intensif.</p>
+            
+            <!-- Resume Button Container -->
+            <div id="resume-container" class="mb-4 hide">
+                <button id="resume-btn" class="w-full sm:w-auto bg-green-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition-all duration-200 text-lg shadow-lg shadow-green-600/30">
+                    Lanjutkan Sesi Terakhir
+                </button>
+            </div>
+
+            <button id="start-btn" class="w-full sm:w-auto bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition-all duration-200 text-lg shadow-lg shadow-indigo-600/30">
                 Mulai Kuis
             </button>
         </div>
@@ -45,18 +54,18 @@
         <div id="quiz-screen" class="hide">
             <!-- Header -->
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-slate-900">Pertanyaan <span id="question-number"></span>/100</h2>
-                <div id="score-display" class="text-lg font-semibold text-blue-600">Skor: <span id="score">0</span></div>
+                <h2 class="text-xl font-bold text-slate-100">Pertanyaan <span id="question-number"></span>/100</h2>
+                <div id="score-display" class="text-lg font-semibold text-indigo-400">Skor: <span id="score">0</span></div>
             </div>
 
             <!-- Progress Bar -->
-            <div class="w-full bg-slate-200 rounded-full h-2.5 mb-6">
-                <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+            <div class="w-full bg-slate-700 rounded-full h-2.5 mb-6">
+                <div id="progress-bar" class="bg-indigo-500 h-2.5 rounded-full transition-all duration-300 ease-out"></div>
             </div>
 
             <!-- Question -->
             <div id="question-card" class="mb-6">
-                <p id="question-text" class="text-lg sm:text-xl font-semibold leading-relaxed mb-6"></p>
+                <p id="question-text" class="text-lg sm:text-xl font-semibold leading-relaxed mb-6 text-slate-100"></p>
                 <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- Options will be inserted here by JS -->
                 </div>
@@ -64,8 +73,8 @@
             
             <!-- Feedback and Next Button -->
             <div id="feedback-container" class="mt-6 text-center">
-                 <p id="feedback-text" class="text-lg font-medium mb-4 h-8"></p>
-                 <button id="next-btn" class="w-full sm:w-auto bg-slate-800 text-white font-bold py-3 px-12 rounded-lg hover:bg-slate-900 transition-colors text-lg shadow-md hide">
+                 <p id="feedback-text" class="text-lg font-medium mb-4 h-8 transition-colors"></p>
+                 <button id="next-btn" class="w-full sm:w-auto bg-slate-600 text-white font-bold py-3 px-12 rounded-lg hover:bg-slate-700 transition-colors text-lg shadow-md hide">
                     Lanjut
                 </button>
             </div>
@@ -73,11 +82,11 @@
 
         <!-- Result Screen -->
         <div id="result-screen" class="hide text-center">
-            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Kuis Selesai!</h1>
-            <p class="text-slate-600 text-xl mb-2">Skor Akhir Anda:</p>
-            <p id="final-score" class="text-6xl font-bold text-blue-600 mb-6"></p>
-            <p id="score-message" class="text-lg text-slate-700 mb-8"></p>
-            <button id="restart-btn" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors text-lg shadow-md">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-4">Kuis Selesai!</h1>
+            <p class="text-slate-400 text-xl mb-2">Skor Akhir Anda:</p>
+            <p id="final-score" class="text-6xl font-bold text-indigo-400 mb-6"></p>
+            <p id="score-message" class="text-lg text-slate-300 mb-8"></p>
+            <button id="restart-btn" class="w-full sm:w-auto bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition-colors text-lg shadow-lg shadow-indigo-600/30">
                 Ulangi Kuis
             </button>
         </div>
@@ -85,8 +94,8 @@
     </div>
 
     <script>
+    document.addEventListener('DOMContentLoaded', () => {
         // --- QUESTION BANK ---
-        // A comprehensive list of 100 questions for anesthesiology.
         const questions = [
             // Farmakologi Dasar & Klinis (1-25)
             { question: "Manakah dari agen inhalasi berikut yang memiliki nilai MAC (Minimum Alveolar Concentration) paling rendah?", options: ["Sevoflurane", "Desflurane", "Isoflurane", "Halothane"], answer: 3 },
@@ -200,10 +209,12 @@
         const startScreen = document.getElementById('start-screen');
         const quizScreen = document.getElementById('quiz-screen');
         const resultScreen = document.getElementById('result-screen');
+        const resumeContainer = document.getElementById('resume-container');
 
         const startBtn = document.getElementById('start-btn');
         const nextBtn = document.getElementById('next-btn');
         const restartBtn = document.getElementById('restart-btn');
+        const resumeBtn = document.getElementById('resume-btn');
 
         const questionNumberEl = document.getElementById('question-number');
         const scoreEl = document.getElementById('score');
@@ -220,17 +231,61 @@
         let score = 0;
         let shuffledQuestions = [];
 
-        // --- FUNCTIONS ---
+        // --- LOCAL STORAGE ---
+        const STORAGE_KEY = 'anesthesiaQuizProgress';
 
-        function startQuiz() {
+        function saveProgress() {
+            const progress = {
+                currentQuestionIndex: currentQuestionIndex,
+                score: score,
+                shuffledQuestions: shuffledQuestions
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+        }
+
+        function loadProgress() {
+            const savedProgress = localStorage.getItem(STORAGE_KEY);
+            if (savedProgress) {
+                return JSON.parse(savedProgress);
+            }
+            return null;
+        }
+
+        function clearProgress() {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+
+        // --- QUIZ LOGIC ---
+        function startQuiz(isNew = true) {
+            if (isNew) {
+                clearProgress();
+            }
+            
             startScreen.classList.add('hide');
             resultScreen.classList.add('hide');
             quizScreen.classList.remove('hide');
             
             currentQuestionIndex = 0;
             score = 0;
-            shuffledQuestions = questions.sort(() => Math.random() - 0.5); // Shuffle questions
+            shuffledQuestions = questions.sort(() => Math.random() - 0.5);
             
+            scoreEl.textContent = score;
+            saveProgress(); // Save the initial state of the new quiz
+            showQuestion();
+        }
+        
+        function resumeQuiz() {
+            const progress = loadProgress();
+            if (!progress) return; 
+
+            currentQuestionIndex = progress.currentQuestionIndex;
+            score = progress.score;
+            shuffledQuestions = progress.shuffledQuestions;
+
+            startScreen.classList.add('hide');
+            resultScreen.classList.add('hide');
+            quizScreen.classList.remove('hide');
+
             scoreEl.textContent = score;
             showQuestion();
         }
@@ -242,14 +297,13 @@
             questionNumberEl.textContent = currentQuestionIndex + 1;
             questionTextEl.textContent = currentQuestion.question;
             
-            // Update progress bar
-            const progressPercentage = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
+            const progressPercentage = ((currentQuestionIndex) / shuffledQuestions.length) * 100;
             progressBar.style.width = `${progressPercentage}%`;
 
             currentQuestion.options.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.textContent = option;
-                button.classList.add('option-btn', 'w-full', 'p-4', 'border-2', 'border-slate-300', 'rounded-lg', 'text-left', 'hover:bg-slate-100', 'hover:border-blue-500', 'transition-colors', 'duration-200');
+                button.classList.add('option-btn', 'w-full', 'p-4', 'border-2', 'border-slate-600', 'rounded-lg', 'text-left', 'text-slate-300', 'hover:bg-slate-700', 'hover:border-indigo-500', 'transition-colors', 'duration-200');
                 button.dataset.index = index;
                 button.addEventListener('click', selectAnswer);
                 optionsContainer.appendChild(button);
@@ -269,16 +323,19 @@
             const selectedIndex = parseInt(selectedButton.dataset.index);
             const correctIndex = shuffledQuestions[currentQuestionIndex].answer;
 
+            const progressPercentage = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+
             if (selectedIndex === correctIndex) {
                 score++;
                 scoreEl.textContent = score;
                 feedbackTextEl.textContent = "Jawaban Benar!";
-                feedbackTextEl.classList.add('text-green-600');
-                feedbackTextEl.classList.remove('text-red-600');
+                feedbackTextEl.classList.add('text-green-400');
+                feedbackTextEl.classList.remove('text-red-400');
             } else {
                 feedbackTextEl.textContent = "Jawaban Salah.";
-                feedbackTextEl.classList.add('text-red-600');
-                feedbackTextEl.classList.remove('text-green-600');
+                feedbackTextEl.classList.add('text-red-400');
+                feedbackTextEl.classList.remove('text-green-400');
             }
 
             Array.from(optionsContainer.children).forEach((button, index) => {
@@ -293,9 +350,14 @@
             if (shuffledQuestions.length > currentQuestionIndex + 1) {
                 nextBtn.classList.remove('hide');
             } else {
-                // End of quiz
                 setTimeout(showResult, 1500);
             }
+        }
+
+        function handleNextQuestion() {
+            currentQuestionIndex++;
+            saveProgress(); // Save progress before showing the next question
+            showQuestion();
         }
 
         function showResult() {
@@ -316,18 +378,22 @@
                 message = 'Jangan menyerah! Tinjau kembali materi dan coba lagi. Anda pasti bisa!';
             }
             scoreMessageEl.textContent = message;
+            clearProgress(); // Clear progress when quiz is finished
         }
 
-        function handleNextQuestion() {
-            currentQuestionIndex++;
-            showQuestion();
+        // --- INITIALIZATION ---
+        const savedProgress = loadProgress();
+        if (savedProgress && savedProgress.shuffledQuestions.length > 0) {
+            resumeContainer.classList.remove('hide');
+            startBtn.textContent = 'Mulai Kuis Baru';
         }
 
         // --- EVENT LISTENERS ---
-        startBtn.addEventListener('click', startQuiz);
+        startBtn.addEventListener('click', () => startQuiz(true));
+        restartBtn.addEventListener('click', () => startQuiz(true));
+        resumeBtn.addEventListener('click', resumeQuiz);
         nextBtn.addEventListener('click', handleNextQuestion);
-        restartBtn.addEventListener('click', startQuiz);
-
+    });
     </script>
 </body>
 </html>
